@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Curso;
+use App\UseCase\CursoDeleteNotification;
 
 final class CursoController extends AbstractController
 {
@@ -32,6 +33,10 @@ final class CursoController extends AbstractController
 
     public function excluir(): void
     {
+        $cursoPHP = new Curso('PHP');
+        $cursoNotification = new CursoDeleteNotification($cursoPHP);
+        $cursoNotification->notify('event_curso_delete');
+
         echo "Excluir";
     }
 }

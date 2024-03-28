@@ -5,6 +5,7 @@
     <a href="/professores/listar" class="btn btn-outline-dark">Professores</a>
     <a href="/alunos/listar" class="btn btn-outline-dark">Alunos</a>
     <a href="/cursos/listar" class="btn btn-outline-dark">Cursos</a>
+    <a href="/cursos/excluir" class="btn btn-outline-dark">CursosExcluir</a>
 </nav>
 
 <hr>
