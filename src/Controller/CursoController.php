@@ -73,6 +73,7 @@ final class CursoController extends AbstractController
         $curso = $this->entityManager->find(Curso::class, $id);
         $curso->name = $_POST['name'];
         $curso->description = $_POST['description'];
+        $curso->status = boolval($_POST['status']);
 
         $this->entityManager->persist($curso);
         $this->entityManager->flush();
