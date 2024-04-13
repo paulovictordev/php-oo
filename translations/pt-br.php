@@ -14,6 +14,8 @@ return [
     'text-save' => 'Salvar',
     'input-type-here' => 'Digite aqui',
     'new-course' => 'Novo Curso',
+    'active'=>'Ativo',
+    'inactive'=>'Inativo',
     'course-description' => 'Descrição',
     'status' => "Status",
     'student-name' => 'Nome',
