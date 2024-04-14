@@ -22,6 +22,8 @@ return [
     'student-cpf' => 'CPF',
     'student-email' => 'E-mail',
     'student-created_at' => 'Registration date',
-
+    'student-new' => 'New Student',
+    'text-save' => 'Save',
+    'student-edit' => 'Edit Student'
 ];
 
