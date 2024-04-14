@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Curso;
+use App\Repository\CursoRepository;
+use App\UseCase\SendStudentNotificationAboutNewCourse;
 use App\Validator\CursoValidator;
 
 final class CursoController extends AbstractController
 {
     public CursoValidator $validator;
-    public mixed $entityManager;
+
+    public CursoRepository $cursoRepository;
 
     public function __construct()
     {
         $this->validator = new CursoValidator();
-        $this->entityManager = parent::entityManager();
+        $this->cursoRepository = new CursoRepository();
     }
 
     public function listar(): void
     {
-
-        $repository = $this->entityManager->getRepository(Curso::class);
-
         parent::render('curso/listar', [
-            'cursos' => $repository->findAll(),
+            'cursos' => $this->cursoRepository->findAll(),
         ]);
     }
 
@@ -49,46 +49,44 @@ final class CursoController extends AbstractController
         $curso->description = $_POST['description'];
         $curso->status = (bool) $_POST['status'];
 
+        $this->cursoRepository->save($curso);
 
-        //INSERT INTO
-        $this->entityManager->persist($curso);
-        $this->entityManager->flush();
+        /**
+         * Dispara notificação para os alunos
+         */
+        (new SendStudentNotificationAboutNewCourse($curso))->notify();
 
         parent::redirect("/cursos/listar");
     }
 
     public function editar(): void
     {
-
-        $id = $_GET['id'];
+        $id = (int)$_GET['id'];
+        $curso = $this->cursoRepository->find($id);
 
         if (true === empty($_POST)) {
-            $curso = $this->entityManager->find(Curso::class, $id);
             parent::render('curso/editar', [
                 'curso' => $curso,
             ]);
             return;
         }
 
-        $curso = $this->entityManager->find(Curso::class, $id);
         $curso->name = $_POST['name'];
         $curso->description = $_POST['description'];
         $curso->status = boolval($_POST['status']);
 
-        $this->entityManager->persist($curso);
-        $this->entityManager->flush();
+        $this->cursoRepository->save($curso);
 
         parent::redirect('/cursos/listar');
     }
 
     public function excluir(): void
     {
-        $id = $_GET['id'];
-        $curso = $this->entityManager->find(Curso::class, $id);
+        $id = (int)$_GET['id'];
+        $curso = $this->cursoRepository->find($id);
 
         if ($curso !== null) {
-            $this->entityManager->remove($curso);
-            $this->entityManager->flush();
+            $this->cursoRepository->remove($curso);
         }
 
         parent::redirect("/cursos/listar");
