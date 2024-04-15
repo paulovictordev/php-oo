@@ -21,8 +21,11 @@ class CursoWhatsappObserver implements SplObserver
         $course = $subject->getCourseToNotify();
         $students = $this->alunoRepository->findAll();
 
+        $msg = '';
         foreach ($students as $student) {
-            echo "Enviando notificação no Whatsapp do aluno: {$student->name}, sobre o novo curso de : {$course->name} <br>";
+            $msg .= "Enviando notificação no Whatsapp do aluno: {$student->name}, sobre o novo curso: {$course->name}" . PHP_EOL;
         }
+
+        file_put_contents('envio.log', $msg, FILE_APPEND | LOCK_EX);
     }
 }
