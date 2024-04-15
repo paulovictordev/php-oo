@@ -26,9 +26,20 @@
                 placeholder="<?=translate('input-type-here')?>"
             >
 
-            <select id="status" name="status" type="boolval" class="form-select" aria-label="Default select example">
+            <label for="status"><?=translate('course-status')?></label>
+            <select id="status" name="status" type="boolval" class="form-select mb-3" aria-label="Default select example">
                 <option value="1">Ativo</option>
                 <option value="0">Inativo</option>
+            </select>
+
+            <label for="types"><?=translate('course-types')?></label>
+            <select id="types" name="types" class="form-select mb-3" aria-label="Default select example">
+                <?php
+                    $curso = new \App\Entity\Curso();
+                    foreach ($curso->getTypes() as $key => $value) {
+                        echo "<option value='{$key}'>{$value}</option>";
+                    }
+                ?>
             </select>
 
             <button class="btn btn-outline-dark w-100 mt-3">

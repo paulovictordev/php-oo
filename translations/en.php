@@ -24,6 +24,8 @@ return [
     'student-created_at' => 'Registration date',
     'student-new' => 'New Student',
     'text-save' => 'Save',
-    'student-edit' => 'Edit Student'
+    'student-edit' => 'Edit Student',
+    'course-types' => 'Courses Types',
+    'course-workload' => 'Courses Workload'
 ];
 

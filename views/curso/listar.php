@@ -8,6 +8,8 @@
             <th><?=translate('course-name')?></th>
             <th><?=translate('course-description')?></th>
             <th><?=translate('status')?></th>
+            <th><?=translate('course-types')?></th>
+            <th><?=translate('course-workload')?></th>
             <th><?=translate('table-actions')?></th>
         </tr>
     </thead>
@@ -29,6 +31,8 @@
                         <td>{$cada->name}</td>
                         <td>{$cada->description}</td>
                         <td>{$label}</td>
+                        <td>{$cada->getTypes()[$cada->types]}</td>
+                        <td>{$cada->workload}h</td>
                         <td>
                             <a href='/cursos/editar?id={$cada->id}' class='btn btn-warning btn-sm'>{$buttonEdit}</a>
                             <a href='/cursos/excluir?id={$cada->id}' class='btn btn-danger btn-sm'>{$buttonDelete}</a>

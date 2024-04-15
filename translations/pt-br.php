@@ -24,6 +24,8 @@ return [
     'student-email' => 'E-mail',
     'student-created_at' => 'Data da Matrícula',
     'student-new' => 'Novo Aluno',
-    'student-edit' => 'Editar Aluno'
+    'student-edit' => 'Editar Aluno',
+    'course-types' => 'Modalidade',
+    'course-workload' => 'Carga Horária'
 ];
 
