@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Observer\Listeners;
 
 use App\Repository\AlunoRepository;
+use App\UseCase\LogWriter;
 use SplObserver;
 use SplSubject;
 
@@ -26,6 +27,8 @@ class CursoEmailObserver implements SplObserver
             $msg .= "Enviando email de notificação para o aluno: {$student->name}, sobre o novo curso: {$course->name}" . PHP_EOL;
         }
 
-        file_put_contents('envio.log', $msg, FILE_APPEND | LOCK_EX);
+        $logWriter = new LogWriter($msg);
+        $logWriter->execute();
+
     }
 }
