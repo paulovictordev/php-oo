@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Curso;
 use App\Repository\CursoRepository;
-use App\UseCase\SetCourseDatails;
 use App\UseCase\SendStudentNotificationAboutNewCourse;
 use App\Validator\CursoValidator;
 
@@ -51,12 +50,8 @@ final class CursoController extends AbstractController
         $curso->status = (bool) $_POST['status'];
         $curso->types = $_POST['types'];
 
-//        $curso->setDetails();
-
-        /**
-         * Executa a acao para obter os detalhes de acordo com a modalidade do curso
-         */
-        (new SetCourseDatails($curso))->execute();
+        // Foi um tentativa em vao
+        $curso->setDetails();
 
         $this->cursoRepository->save($curso);
 
@@ -85,12 +80,8 @@ final class CursoController extends AbstractController
         $curso->status = boolval($_POST['status']);
         $curso->types = $_POST['types'];
 
-//        $curso->setDetails();
-
-        /**
-         * Executa a acao para obter os detalhes de acordo com a modalidade do curso
-         */
-        (new SetCourseDatails($curso))->execute();
+        // Foi um tentativa em vao
+        $curso->setDetails();
 
         $this->cursoRepository->save($curso);
 
